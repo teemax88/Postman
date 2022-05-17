@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "fde5a26a-5d45-48f2-8c07-f46ab8a39a9b",
+		"name": "MagicSearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "230_никого не нашли по запросу, пустой ответ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ищем Игнат\", function () {\r",
+							"    pm.response.to.have.status(230);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=Игнат",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Игнат"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "231_найден 1 юзер",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ищем Роман Пупкин\", function () {\r",
+							"    pm.response.to.have.status(231);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=Роман&query=Пупкин",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Роман"
+						},
+						{
+							"key": "query",
+							"value": "Пупкин"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "232_найдено больше 1 юзера (но без компаний)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"найдено больше 1 юзера. Ожидаем статус 232\", function () {\r",
+							"    pm.response.to.have.status(232);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Статус 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=user&partyType=USER",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "user"
+						},
+						{
+							"key": "partyType",
+							"value": "USER"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "233_найдена_1_компания",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Нашли одну компанию\", function () {\r",
+							"    pm.response.to.have.status(233);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=Ромашка&query=1234567890&query=1234567890123&partyType=COMPANY",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Ромашка"
+						},
+						{
+							"key": "query",
+							"value": "1234567890"
+						},
+						{
+							"key": "query",
+							"value": "1234567890123"
+						},
+						{
+							"key": "partyType",
+							"value": "COMPANY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "234_найдено больше 1 компании (но без юзеров)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"найдено больше 1 компании, но без юзеров\", function () {\r",
+							"    pm.response.to.have.status(234);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"найдено больше 1 компании\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=user&partyType=COMPANY",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "user"
+						},
+						{
+							"key": "partyType",
+							"value": "COMPANY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "235_найдены как юзеры, так и компании",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Найдены все Юзеры и Компаний\", function () {\r",
+							"    pm.response.to.have.status(235);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Найдены все Юзеры и Компаний\", function () {\r",
+							"    pm.response.to.have.status(300);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=name",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "455_не указан параметр query в запросе",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Не найден обязательный параметр query\", function () {\r",
+							"    pm.response.to.have.status(455);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Не найден обязательный параметр query\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "456_длина запроса выше 1000 символов",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Длина запроса не должна превышать 1000 символов: Ожидаем ошибку 456\", function () {\r",
+							"    pm.response.to.have.status(456);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ожидаем ошибку 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "457_неправильно задан partyType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"неправильно задан partyType\", function () {\r",
+							"    pm.response.to.have.status(457);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=name&partyType",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "name"
+						},
+						{
+							"key": "partyType",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "458_неправильно задан параметр taskStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"неправильно задан параметр taskStatus\", function () {\r",
+							"    pm.response.to.have.status(458);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=name&taskStatus",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "name"
+						},
+						{
+							"key": "taskStatus",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "459_неправильно задан параметр include",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Параметр include может принимать только значения: ALL, USER, COMPANY, TASK, WHY\", function () {\r",
+							"    pm.response.to.have.status(459);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?query=user&include=id_company",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "user"
+						},
+						{
+							"key": "include",
+							"value": "id_company"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
